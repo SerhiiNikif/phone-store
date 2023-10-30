@@ -1,9 +1,18 @@
 import "./scss/app.scss";
 import { Header, Categories, Sort, PhoneBlock } from "./components";
+import { useEffect, useState } from "react";
 
-import phones from "./assets/phones.json";
+const API_URL = process.env.REACT_APP_STAGE === 'development' && process.env.REACT_APP_API_URL;
 
 function App() {
+  const [items, setItems] = useState([]);
+
+  useEffect(() => {
+    fetch(API_URL)
+      .then((res) => res.json())
+      .then((json) => setItems(json));
+  }, []);
+
   return (
     <div className="wrapper">
       <Header />
@@ -15,8 +24,8 @@ function App() {
           </div>
           <h2 className="content__title">All phones</h2>
           <div className="content__items">
-            {phones.map((obj) => (
-              <PhoneBlock key={obj.id} {...obj}/>
+            {items.map((obj) => (
+              <PhoneBlock key={obj._id} {...obj}/>
             ))}
           </div>
         </div>
