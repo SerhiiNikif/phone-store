@@ -1,5 +1,5 @@
 import "./scss/app.scss";
-import { Header, Categories, Sort } from "./components";
+import { Header, Categories, Sort, PhoneBlock } from "./components";
 
 function App() {
   return (
@@ -10,6 +10,11 @@ function App() {
           <div className="content__top">
             <Categories />
             <Sort />
+          </div>
+          <h2 className="content__title">All phones</h2>
+          <div className="content__items">
+            <PhoneBlock title="Apple iPhone 15 Pro" price={50000} />
+            <PhoneBlock title="Apple iPhone 14" price={45000} />
           </div>
         </div>
       </div>
