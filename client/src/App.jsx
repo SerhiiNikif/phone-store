@@ -16,7 +16,7 @@ function App() {
           <h2 className="content__title">All phones</h2>
           <div className="content__items">
             {phones.map((obj) => (
-              <PhoneBlock {...obj}/>
+              <PhoneBlock key={obj.id} {...obj}/>
             ))}
           </div>
         </div>

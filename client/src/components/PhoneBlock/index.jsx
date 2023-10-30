@@ -15,6 +15,7 @@ export const PhoneBlock = ({ title, price, imageUrl, sizes, types }) => {
             <li
               onClick={() => setActiveType(index)}
               className={activeType === index ? "active" : ""}
+              key={index}
             >
               {nameTypes[type]}
             </li>
@@ -25,6 +26,7 @@ export const PhoneBlock = ({ title, price, imageUrl, sizes, types }) => {
             <li
               onClick={() => setActiveSize(index)}
               className={activeSize === index ? "active" : ""}
+              key={index}
             >
               {size} GB
             </li>
