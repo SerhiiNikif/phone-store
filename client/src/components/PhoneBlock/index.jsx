@@ -1,26 +1,39 @@
-export const PhoneBlock = (props) => {
+import { useState } from "react";
+
+export const PhoneBlock = ({ title, price, imageUrl, sizes, types }) => {
+  const nameTypes = ["black", "white"];
+  const [activeType, setActiveType] = useState(0);
+  const [activeSize, setActiveSize] = useState(0);
+
   return (
     <div className="phone-block">
-      <img
-        className="phone-block__image"
-        src="https://content.rozetka.com.ua/goods/images/big/364830437.jpg"
-        alt="Phone"
-      />
-      <h4 className="phone-block__title">{props.title}</h4>
+      <img className="phone-block__image" src={imageUrl} alt="Phone" />
+      <h4 className="phone-block__title">{title}</h4>
       <div className="phone-block__selector">
         <ul>
-          <li className="active">black</li>
-          <li>white</li>
+          {types.map((type, index) => (
+            <li
+              onClick={() => setActiveType(index)}
+              className={activeType === index ? "active" : ""}
+            >
+              {nameTypes[type]}
+            </li>
+          ))}
         </ul>
         <ul>
-          <li className="active">128 GB</li>
-          <li>256 GB</li>
-          <li>512 GB</li>
+          {sizes.map((size, index) => (
+            <li
+              onClick={() => setActiveSize(index)}
+              className={activeSize === index ? "active" : ""}
+            >
+              {size} GB
+            </li>
+          ))}
         </ul>
       </div>
       <div className="phone-block__bottom">
-        <div className="phone-block__price">from {props.price} ₴</div>
-        <div className="button button--outline button--add">
+        <div className="phone-block__price">from {price} ₴</div>
+        <button className="button button--outline button--add">
           <svg
             width="12"
             height="12"
@@ -34,9 +47,9 @@ export const PhoneBlock = (props) => {
             ></path>
           </svg>
           <span>Add</span>
-          <i>2</i>
-        </div>
+          <i>0</i>
+        </button>
       </div>
     </div>
-  )
-}
+  );
+};

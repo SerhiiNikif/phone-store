@@ -1,6 +1,8 @@
 import "./scss/app.scss";
 import { Header, Categories, Sort, PhoneBlock } from "./components";
 
+import phones from "./assets/phones.json";
+
 function App() {
   return (
     <div className="wrapper">
@@ -13,8 +15,9 @@ function App() {
           </div>
           <h2 className="content__title">All phones</h2>
           <div className="content__items">
-            <PhoneBlock title="Apple iPhone 15 Pro" price={50000} />
-            <PhoneBlock title="Apple iPhone 14" price={45000} />
+            {phones.map((obj) => (
+              <PhoneBlock {...obj}/>
+            ))}
           </div>
         </div>
       </div>
