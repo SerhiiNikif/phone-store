@@ -1,7 +1,7 @@
-@import './variables';
-@import 'libs/normalize';
+@import "./variables";
+@import "libs/normalize";
 
-@import 'components/all';
+@import "components/all";
 
 body {
   background-color: $background;
@@ -34,7 +34,7 @@ body {
   &__items {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(2, 1fr);
+    grid-template-rows: repeat(1, 1fr);
     grid-column-gap: 11px;
 
     @media (max-width: 1400px) {
@@ -44,7 +44,7 @@ body {
     @media (max-width: 1060px) {
       grid-template-columns: repeat(2, 1fr);
     }
-    
+
     @media (max-width: 730px) {
       grid-template-columns: repeat(1, 1fr);
     }
@@ -307,11 +307,11 @@ body {
         }
 
         &:hover {
-          background-color: darken($color: $gray-line, $amount: 90);
-          border-color: darken($color: $gray-line, $amount: 90);
+          background-color: #082f49;
+          border-color: #082f49;
 
           span {
-            color: $gray-line;
+            color: white;
           }
         }
 

@@ -3,8 +3,8 @@ import phoneService from '../services/phone.service.js';
 class PhoneController {
     async getPhones(req, res, next) {
         try {
-            const {category, sortBy, order} = req.query;
-            const getPhonesService = await phoneService.getPhones(category, sortBy, order);
+            const {page, category, sortBy, order, search} = req.query;
+            const getPhonesService = await phoneService.getPhones(page, category, sortBy, order, search);
             res.status(200).json(getPhonesService);
         } catch (e) {
             next(e);

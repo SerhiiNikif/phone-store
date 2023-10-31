@@ -2,9 +2,22 @@ import PhoneModel from "../models/Phone.js";
 import ApiError from "../exceptions/api-error.js";
 
 class PhoneService {
-    async getPhones(category, sortBy, order) {
-        const result = await PhoneModel.find(category && {category: category}).sort({[sortBy]: order});
-        return result
+    async getPhones(page = 1, category, sortBy, order, search) {
+        const limit = 4;
+        const searchParams = {
+            ...(category && { category }),
+            ...(search && { title: new RegExp(search, "i") })
+        };
+    
+        const [result, countPhones] = await Promise.all([
+            PhoneModel.find(searchParams)
+                .skip((page - 1) * limit)
+                .limit(limit)
+                .sort({ [sortBy]: order }),
+            PhoneModel.countDocuments()
+        ]);
+    
+        return { result, countPhones };
     }
 
     async addPhone(title, imageUrl, types, sizes, price, category, rating) {

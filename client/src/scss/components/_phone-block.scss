@@ -5,12 +5,9 @@
   text-align: center;
   margin-bottom: 65px;
 
-  @media (max-width: 645px) {
-    flex-direction: column;
-
-    .header__cart {
-      margin-top: 20px;
-    }
+  &-wrapper {
+    display: flex;
+    justify-content: center;
   }
 
   &__image {
