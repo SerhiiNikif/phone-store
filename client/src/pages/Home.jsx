@@ -1,9 +1,10 @@
 import { useContext, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
 
 import { PhoneBlock, Categories, Sort, Skeleton, Pagination } from "../components";
 import { SearchContext } from "../App";
-import { setCategoryId } from "../redux/slices/filterSlice";
+import { setCategoryId, setCurrentPage, setCountPages, setLimit } from "../redux/slices/filterSlice";
 
 const API_URL =
   process.env.REACT_APP_STAGE === "development" &&
@@ -11,15 +12,17 @@ const API_URL =
 
 const Home = () => {
   const dispatch = useDispatch();
-  const {categoryId, sort} = useSelector((state) => state.filter);
+  const {categoryId, sort, currentPage, countPages, limit} = useSelector((state) => state.filter);
   const {searchValue} = useContext(SearchContext);
   const [items, setItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [countPhones, setCountPhones] = useState(0);
 
   const onChangeCategory = (index) => {
-    dispatch(setCategoryId(index))
+    dispatch(setCategoryId(index));
+  };
+
+  const onChangePage = (number) => {
+    dispatch(setCurrentPage(number));
   };
 
   useEffect(() => {
@@ -29,17 +32,19 @@ const Home = () => {
     const order = sort.sortProperty.includes("-") ? "asc" : "desc";
     const search = searchValue ? `&search=${searchValue}` : "";
 
-    fetch(
-      `${API_URL}?page=${currentPage}&limit=4&${category}&sortBy=${sortBy}&order=${order}${search}`
-    )
-      .then((res) => res.json())
-      .then((json) => {
-        setCountPhones(json.countPhones);
-        setItems(json.result);
+    axios
+      .get(
+        `${API_URL}?page=${currentPage}&limit=${limit}&${category}&sortBy=${sortBy}&order=${order}${search}`
+      )
+      .then((res) => {
+        dispatch(setCountPages(res.data.countPages));
+        dispatch(setLimit(res.data.limit));
+        setItems(res.data.phones);
         setIsLoading(false);
       });
+
     window.scrollTo(0, 0);
-  }, [categoryId, sort.sortProperty, searchValue, currentPage]);
+  }, [categoryId, sort.sortProperty, searchValue, currentPage, limit, dispatch]);
 
   const phones = items.map((obj) => <PhoneBlock key={obj._id} {...obj} />);
   const skeletons = [...new Array(4)].map((_, index) => (
@@ -54,10 +59,7 @@ const Home = () => {
       </div>
       <h2 className="content__title">All phones</h2>
       <div className="content__items">{isLoading ? skeletons : phones}</div>
-      <Pagination
-        countPhones={countPhones}
-        onChangePage={(number) => setCurrentPage(number)}
-      />
+      <Pagination limit={limit} countPages={countPages} currentPage={currentPage} onChangePage={onChangePage} />
     </div>
   );
 }
