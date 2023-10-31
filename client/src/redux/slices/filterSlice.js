@@ -30,9 +30,14 @@ export const filterSlice = createSlice({
     setLimit: (state, action) => {
       state.limit = action.payload;
     },
+    setFilters: (state, action) => {
+      state.sort = action.payload.sort;
+      state.currentPage = Number(action.payload.currentPage);
+      state.categoryId = Number(action.payload.categoryId);
+    },
   },
 });
 
-export const { setCategoryId, setSort, setCurrentPage, setCountPages, setLimit } = filterSlice.actions;
+export const { setCategoryId, setSort, setCurrentPage, setCountPages, setLimit, setFilters } = filterSlice.actions;
 
 export default filterSlice.reducer;
