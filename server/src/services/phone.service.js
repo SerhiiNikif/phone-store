@@ -1,8 +1,9 @@
 import PhoneModel from "../models/Phone.js";
+import ApiError from "../exceptions/api-error.js";
 
 class PhoneService {
-    async getPhones() {
-        const result = await PhoneModel.find();
+    async getPhones(category, sortBy, order) {
+        const result = await PhoneModel.find(category && {category: category}).sort({[sortBy]: order});
         return result
     }
 
