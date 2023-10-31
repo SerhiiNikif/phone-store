@@ -1,9 +1,31 @@
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-export const PhoneBlock = ({ title, price, imageUrl, sizes, types }) => {
-  const nameTypes = ["black", "white"];
+import { addItem } from "../../redux/slices/cartSlice";
+
+const typeNames = ["black", "white"];
+
+export function PhoneBlock({ _id, title, price, imageUrl, sizes, types }) {
+  const dispatch = useDispatch();
+  const cartItem = useSelector((state) =>
+    state.cart.items.find((obj) => obj._id === _id)
+  );
   const [activeType, setActiveType] = useState(0);
   const [activeSize, setActiveSize] = useState(0);
+
+  const addedCount = cartItem ? cartItem.count : 0;
+
+  const onClickAdd = () => {
+    const item = {
+      _id,
+      title,
+      price,
+      imageUrl,
+      type: typeNames[activeType],
+      size: sizes[activeSize],
+    };
+    dispatch(addItem(item));
+  };
 
   return (
     <div className="phone-block-wrapper">
@@ -18,7 +40,7 @@ export const PhoneBlock = ({ title, price, imageUrl, sizes, types }) => {
                 className={activeType === index ? "active" : ""}
                 key={index}
               >
-                {nameTypes[type]}
+                {typeNames[type]}
               </li>
             ))}
           </ul>
@@ -36,7 +58,7 @@ export const PhoneBlock = ({ title, price, imageUrl, sizes, types }) => {
         </div>
         <div className="phone-block__bottom">
           <div className="phone-block__price">from {price} ₴</div>
-          <button className="button button--outline button--add">
+          <button onClick={onClickAdd} className="button button--outline button--add">
             <svg
               width="12"
               height="12"
@@ -50,7 +72,7 @@ export const PhoneBlock = ({ title, price, imageUrl, sizes, types }) => {
               ></path>
             </svg>
             <span>Add</span>
-            <i>0</i>
+            {addedCount > 0 && <i>{addedCount}</i>}
           </button>
         </div>
       </div>
