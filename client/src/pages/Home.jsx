@@ -1,29 +1,32 @@
 import { useContext, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import { PhoneBlock, Categories, Sort, Skeleton, Pagination } from "../components";
 import { SearchContext } from "../App";
+import { setCategoryId } from "../redux/slices/filterSlice";
 
 const API_URL =
   process.env.REACT_APP_STAGE === "development" &&
   process.env.REACT_APP_API_URL;
 
 const Home = () => {
-  const { searchValue } = useContext(SearchContext);
+  const dispatch = useDispatch();
+  const {categoryId, sort} = useSelector((state) => state.filter);
+  const {searchValue} = useContext(SearchContext);
   const [items, setItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [categoryId, setCategoryId] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [countPhones, setCountPhones] = useState(0);
-  const [sortType, setSortType] = useState({
-    name: "popularity",
-    sortProperty: "rating",
-  });
+
+  const onChangeCategory = (index) => {
+    dispatch(setCategoryId(index))
+  };
 
   useEffect(() => {
     setIsLoading(true);
     const category = categoryId > 0 ? `category=${categoryId}` : "";
-    const sortBy = sortType.sortProperty.replace("-", "");
-    const order = sortType.sortProperty.includes("-") ? "asc" : "desc";
+    const sortBy = sort.sortProperty.replace("-", "");
+    const order = sort.sortProperty.includes("-") ? "asc" : "desc";
     const search = searchValue ? `&search=${searchValue}` : "";
 
     fetch(
@@ -36,7 +39,7 @@ const Home = () => {
         setIsLoading(false);
       });
     window.scrollTo(0, 0);
-  }, [categoryId, sortType, searchValue, currentPage]);
+  }, [categoryId, sort.sortProperty, searchValue, currentPage]);
 
   const phones = items.map((obj) => <PhoneBlock key={obj._id} {...obj} />);
   const skeletons = [...new Array(4)].map((_, index) => (
@@ -46,11 +49,8 @@ const Home = () => {
   return (
     <div className="container">
       <div className="content__top">
-        <Categories
-          value={categoryId}
-          onCangeCategory={(index) => setCategoryId(index)}
-        />
-        <Sort value={sortType} onChangeSort={(index) => setSortType(index)} />
+        <Categories value={categoryId} onCangeCategory={onChangeCategory} />
+        <Sort />
       </div>
       <h2 className="content__title">All phones</h2>
       <div className="content__items">{isLoading ? skeletons : phones}</div>

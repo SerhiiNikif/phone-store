@@ -7,8 +7,8 @@ import phoneController from '../controllers/phone-controller.js';
 import { validateInputFields, ctrlWrapper } from '../middlewares/index.js';
 
 const categoryValidations = [
-    body('title').isLength({ min: 3, max: 100 }).isString(),
-    body('imageUrl').isURL()
+  body('title').isLength({ min: 3, max: 100 }).isString(),
+  body('imageUrl').isURL()
 ];
 
 router.get('/', ctrlWrapper(phoneController.getPhones));
