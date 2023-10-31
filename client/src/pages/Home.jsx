@@ -1,14 +1,13 @@
-import { useContext, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import axios from "axios";
 import qs from "qs";
 import { useNavigate } from "react-router-dom";
 
 import { PhoneBlock, Categories, Sort, Skeleton, Pagination } from "../components";
 import { sortList } from "../components/Sort";
-import { SearchContext } from "../App";
-import { setCategoryId, setCurrentPage, setFilters } from "../redux/slices/filterSlice";
+import { setCategoryId, setCurrentPage, setFilters, selectFilter } from "../redux/slices/filterSlice";
 import { fetchPhones } from "../redux/slices/asyncActions";
+import { selectPhoneData } from "../redux/slices/phoneSlise";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -16,9 +15,8 @@ const Home = () => {
   const isSearch = useRef(false);
   const isMounted = useRef(false);
 
-  const { categoryId, sort, currentPage } = useSelector((state) => state.filter);
-  const { items, status, countPages, limit } = useSelector((state) => state.phone);
-  const {searchValue} = useContext(SearchContext);
+  const { categoryId, sort, currentPage, searchValue } = useSelector(selectFilter);
+  const { items, status, limit, countPages } = useSelector(selectPhoneData);
 
   const onChangeCategory = (index) => {
     dispatch(setCategoryId(index));

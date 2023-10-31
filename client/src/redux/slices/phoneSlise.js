@@ -31,7 +31,7 @@ export const phoneSlice = createSlice({
       .addCase(fetchPhones.fulfilled, (state, action) => {
         state.items = action.payload.phones;
         state.limit = action.payload.limit;
-      state.countPages = action.payload.countPages;
+        state.countPages = action.payload.countPages;
         state.status = "success";
       })
       .addCase(fetchPhones.rejected, (state) => {
@@ -40,6 +40,8 @@ export const phoneSlice = createSlice({
       })
   },
 });
+
+export const selectPhoneData = (state) => state.phone;
 
 export const { setItems, setLimit, setCountPages } = phoneSlice.actions;
 
