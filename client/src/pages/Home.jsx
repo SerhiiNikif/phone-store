@@ -5,9 +5,10 @@ import { useNavigate } from "react-router-dom";
 
 import { PhoneBlock, Categories, Sort, Skeleton, Pagination } from "../components";
 import { sortList } from "../components/Sort";
-import { setCategoryId, setCurrentPage, setFilters, selectFilter } from "../redux/slices/filterSlice";
-import { fetchPhones } from "../redux/slices/asyncActions";
-import { selectPhoneData } from "../redux/slices/phoneSlise";
+import { setCategoryId, setCurrentPage, setFilters } from "../redux/filter/slice";
+import { fetchPhones } from "../redux/phone/asyncActions";
+import { selectFilter } from "../redux/filter/selectors";
+import { selectPhoneData } from "../redux/phone/selectors";
 
 const Home = () => {
   const dispatch = useDispatch();

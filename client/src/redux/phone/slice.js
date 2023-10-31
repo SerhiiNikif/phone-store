@@ -41,8 +41,6 @@ export const phoneSlice = createSlice({
   },
 });
 
-export const selectPhoneData = (state) => state.phone;
-
 export const { setItems, setLimit, setCountPages } = phoneSlice.actions;
 
 export default phoneSlice.reducer;
