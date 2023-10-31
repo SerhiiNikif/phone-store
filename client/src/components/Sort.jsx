@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { memo, useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { selectSort, setSort } from "../redux/slices/filterSlice";
@@ -12,7 +12,7 @@ export const sortList = [
   { name: "alphabet (ASC)", sortProperty: "-title" },
 ];
 
-export const Sort = () => {
+export const Sort = memo(({value}) => {
   const dispatch = useDispatch();
   const sort = useSelector(selectSort);
   const [open, setOpen] = useState(false);
@@ -25,7 +25,8 @@ export const Sort = () => {
 
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (!event.composedPath().includes(sortRef.current)) {
+      const path = event.composedPath && event.composedPath();
+      if (path && sortRef.current && !event.composedPath().includes(sortRef.current)) {
         setOpen(false);
       }
     }
@@ -51,7 +52,7 @@ export const Sort = () => {
           ></path>
         </svg>
         <b>Sort by:</b>
-        <span onClick={() => setOpen(!open)}>{sort.name}</span>
+        <span onClick={() => setOpen(!open)}>{value.name}</span>
       </div>
       {open && (
         <div className="sort__popup">
@@ -59,7 +60,7 @@ export const Sort = () => {
             {sortList.map((obj, index) => (
               <li
                 onClick={() => onClickListItem(obj)}
-                className={sort.sortProperty === obj.sortProperty ? "active" : ""}
+                className={value.sortProperty === obj.sortProperty ? "active" : ""}
                 key={index}
               >
                 {obj.name}
@@ -70,4 +71,4 @@ export const Sort = () => {
       )}
     </div>
   );
-};
+});

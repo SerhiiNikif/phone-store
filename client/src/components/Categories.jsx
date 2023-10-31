@@ -1,7 +1,8 @@
+import { memo } from "react";
+
 const categories = ["All", "15", "14", "13", "12", "11"];
 
-export const Categories = ({ value, onCangeCategory }) => {
-
+export const Categories = memo(({ value, onCangeCategory }) => {
   return (
     <div className="categories">
       <ul>
@@ -17,4 +18,4 @@ export const Categories = ({ value, onCangeCategory }) => {
       </ul>
     </div>
   );
-};
+});

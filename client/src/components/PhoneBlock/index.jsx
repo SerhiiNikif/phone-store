@@ -22,6 +22,7 @@ export const PhoneBlock = ({ _id, title, price, imageUrl, sizes, types }) => {
       imageUrl,
       type: typeNames[activeType],
       size: sizes[activeSize],
+      count: 0
     };
     dispatch(addItem(item));
   };

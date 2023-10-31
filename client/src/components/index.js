@@ -6,3 +6,5 @@ export * from "./PhoneBlock/Skeleton";
 export * from "./NotFoundBlock";
 export * from "./Pagination";
 export * from "./Search";
+export * from "./CartItem";
+export * from "./CartEmpty";

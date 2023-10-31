@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import qs from "qs";
 import { useNavigate } from "react-router-dom";
@@ -18,9 +18,9 @@ const Home = () => {
   const { categoryId, sort, currentPage, searchValue } = useSelector(selectFilter);
   const { items, status, limit, countPages } = useSelector(selectPhoneData);
 
-  const onChangeCategory = (index) => {
+  const onChangeCategory = useCallback((index) => {
     dispatch(setCategoryId(index));
-  };
+  }, []);
 
   const onChangePage = (number) => {
     dispatch(setCurrentPage(number));
@@ -89,7 +89,7 @@ const Home = () => {
     <div className="container">
       <div className="content__top">
         <Categories value={categoryId} onCangeCategory={onChangeCategory} />
-        <Sort />
+        <Sort value={sort} />
       </div>
       <h2 className="content__title">All phones</h2>
       {status === "error" ? (
