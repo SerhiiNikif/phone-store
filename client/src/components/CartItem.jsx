@@ -15,7 +15,7 @@ function CartItem({ _id, title, type, size, price, count, imageUrl }) {
   };
 
   const onClickRemove = () => {
-    if (window.confirm('Are you sure you want to delete the product?')) {
+    if (window.confirm("Are you sure you want to delete the product?")) {
       dispatch(removeItem(_id));
     }
   };
@@ -27,10 +27,15 @@ function CartItem({ _id, title, type, size, price, count, imageUrl }) {
       </div>
       <div className="cart__item-info">
         <h3>{title}</h3>
-        <p>{type}, {size} GB</p>
+        <p>
+          {type}, {size} GB
+        </p>
       </div>
       <div className="cart__item-count">
-        <div onClick={onClickMinus} className="button button--outline button--circle cart__item-count-minus">
+        <div
+          onClick={onClickMinus}
+          className="button button--outline button--circle cart__item-count-minus"
+        >
           <svg
             width="10"
             height="10"
@@ -49,7 +54,10 @@ function CartItem({ _id, title, type, size, price, count, imageUrl }) {
           </svg>
         </div>
         <b>{count}</b>
-        <div onClick={onClickPlus} className="button button--outline button--circle cart__item-count-plus">
+        <div
+          onClick={onClickPlus}
+          className="button button--outline button--circle cart__item-count-plus"
+        >
           <svg
             width="10"
             height="10"
@@ -72,7 +80,10 @@ function CartItem({ _id, title, type, size, price, count, imageUrl }) {
         <b>{price * count} ₴</b>
       </div>
       <div className="cart__item-remove">
-        <div onClick={onClickRemove} className="button button--outline button--circle">
+        <div
+          onClick={onClickRemove}
+          className="button button--outline button--circle"
+        >
           <svg
             width="10"
             height="10"

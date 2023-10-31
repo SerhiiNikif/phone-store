@@ -29,6 +29,15 @@ class PhoneController {
       next(e);
     }
   }
+
+  async getPhoneById(req, res, next) {
+    try {
+        const getPhoneByIdService = await phoneService.getPhoneById(req.params.id);
+        res.status(200).json(getPhoneByIdService);
+    } catch (e) {
+        next(e);
+    }
+  }
 }
 
 export default new PhoneController();

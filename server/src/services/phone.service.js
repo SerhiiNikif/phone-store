@@ -27,6 +27,13 @@ class PhoneService {
     return {id: result._id}
   }
 
+  async getPhoneById (id) {
+    let result = await PhoneModel.findById(id);
+    
+    if (!result) throw ApiError.NotFoundError()
+    return result;
+  }
+
   async checkIfPhoneExists(name) {
     const phone = await PhoneModel.findOne({ name });
     if (phone) {

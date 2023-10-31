@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 import { addItem, selectCartItemById } from "../../redux/slices/cartSlice";
 
 const typeNames = ["black", "white"];
 
-export function PhoneBlock({ _id, title, price, imageUrl, sizes, types }) {
+export const PhoneBlock = ({ _id, title, price, imageUrl, sizes, types }) => {
   const dispatch = useDispatch();
   const cartItem = useSelector(selectCartItemById(_id));
   const [activeType, setActiveType] = useState(0);
@@ -28,8 +29,10 @@ export function PhoneBlock({ _id, title, price, imageUrl, sizes, types }) {
   return (
     <div className="phone-block-wrapper">
       <div className="phone-block">
-        <img className="phone-block__image" src={imageUrl} alt="Phone" />
-        <h4 className="phone-block__title">{title}</h4>
+        <Link key={_id} to={`/phone/${_id}`}>
+          <img className="phone-block__image" src={imageUrl} alt="Phone" />
+          <h4 className="phone-block__title">{title}</h4>
+        </Link>
         <div className="phone-block__selector">
           <ul>
             {types.map((type, index) => (
