@@ -1,18 +1,14 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
-import {
-  PhoneBlock,
-  Categories,
-  Sort,
-  Skeleton,
-  Pagination,
-} from "../components";
+import { PhoneBlock, Categories, Sort, Skeleton, Pagination } from "../components";
+import { SearchContext } from "../App";
 
 const API_URL =
   process.env.REACT_APP_STAGE === "development" &&
   process.env.REACT_APP_API_URL;
 
-function Home({ searchValue }) {
+const Home = () => {
+  const { searchValue } = useContext(SearchContext);
   const [items, setItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [categoryId, setCategoryId] = useState(0);
