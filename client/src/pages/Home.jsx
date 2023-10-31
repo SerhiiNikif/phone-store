@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import qs from "qs";
@@ -7,11 +7,8 @@ import { useNavigate } from "react-router-dom";
 import { PhoneBlock, Categories, Sort, Skeleton, Pagination } from "../components";
 import { sortList } from "../components/Sort";
 import { SearchContext } from "../App";
-import { setCategoryId, setCurrentPage, setCountPages, setLimit, setFilters } from "../redux/slices/filterSlice";
-
-const API_URL =
-  process.env.REACT_APP_STAGE === "development" &&
-  process.env.REACT_APP_API_URL;
+import { setCategoryId, setCurrentPage, setFilters } from "../redux/slices/filterSlice";
+import { fetchPhones } from "../redux/slices/asyncActions";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -19,10 +16,9 @@ const Home = () => {
   const isSearch = useRef(false);
   const isMounted = useRef(false);
 
-  const {categoryId, sort, currentPage, countPages, limit} = useSelector((state) => state.filter);
+  const { categoryId, sort, currentPage } = useSelector((state) => state.filter);
+  const { items, status, countPages, limit } = useSelector((state) => state.phone);
   const {searchValue} = useContext(SearchContext);
-  const [items, setItems] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
 
   const onChangeCategory = (index) => {
     dispatch(setCategoryId(index));
@@ -32,24 +28,22 @@ const Home = () => {
     dispatch(setCurrentPage(number));
   };
 
-  const fetchPhones = () => {
-    setIsLoading(true);
-
+  const getPhones = async () => {
     const category = categoryId > 0 ? `category=${categoryId}` : "";
     const sortBy = sort.sortProperty.replace("-", "");
     const order = sort.sortProperty.includes("-") ? "asc" : "desc";
     const search = searchValue ? `&search=${searchValue}` : "";
 
-    axios
-      .get(
-        `${API_URL}?page=${currentPage}&limit=${limit}&${category}&sortBy=${sortBy}&order=${order}${search}`
-      )
-      .then((res) => {
-        dispatch(setCountPages(res.data.countPages));
-        dispatch(setLimit(res.data.limit));
-        setItems(res.data.phones);
-        setIsLoading(false);
-      });
+    dispatch(
+      fetchPhones({
+        category,
+        sortBy,
+        order,
+        search,
+        currentPage,
+        limit
+      })
+    );
 
     window.scrollTo(0, 0);
   };
@@ -83,11 +77,7 @@ const Home = () => {
 
   // If there was a first render, then we ask for phone numbers
   useEffect(() => {
-    window.scrollTo(0, 0);
-
-    if (!isSearch.current) {
-      fetchPhones();
-    }
+    getPhones();
 
     isSearch.current = false;
   }, [categoryId, sort.sortProperty, searchValue, currentPage]);
@@ -104,7 +94,16 @@ const Home = () => {
         <Sort />
       </div>
       <h2 className="content__title">All phones</h2>
-      <div className="content__items">{isLoading ? skeletons : phones}</div>
+      {status === "error" ? (
+        <div className="content__error-info">
+          <h2>An error has occurred 😕</h2>
+          <p>Unfortunately, we were unable to obtain phones. Please try again later.</p>
+        </div>
+      ) : (
+        <div className="content__items">
+          {status === "loading" ? skeletons : phones}
+        </div>
+      )}
       <Pagination limit={limit} countPages={countPages} currentPage={currentPage} onChangePage={onChangePage} />
     </div>
   );

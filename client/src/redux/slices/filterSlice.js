@@ -3,8 +3,6 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   categoryId: 0,
   currentPage: 1,
-  countPages: 1,
-  limit: 4,
   sort: {
     name: "popularity",
     sortProperty: "rating",
@@ -24,12 +22,6 @@ export const filterSlice = createSlice({
     setCurrentPage: (state, action) => {
       state.currentPage = action.payload;
     },
-    setCountPages: (state, action) => {
-      state.countPages = action.payload;
-    },
-    setLimit: (state, action) => {
-      state.limit = action.payload;
-    },
     setFilters: (state, action) => {
       state.sort = action.payload.sort;
       state.currentPage = Number(action.payload.currentPage);
@@ -38,6 +30,6 @@ export const filterSlice = createSlice({
   },
 });
 
-export const { setCategoryId, setSort, setCurrentPage, setCountPages, setLimit, setFilters } = filterSlice.actions;
+export const { setCategoryId, setSort, setCurrentPage, setFilters } = filterSlice.actions;
 
 export default filterSlice.reducer;

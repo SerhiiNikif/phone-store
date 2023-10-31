@@ -1,10 +1,17 @@
-import phoneService from '../services/phone.service.js';
+import phoneService from "../services/phone.service.js";
 
 class PhoneController {
   async getPhones(req, res, next) {
     try {
-      const {page, limit, category, sortBy, order, search} = req.query;
-      const getPhonesService = await phoneService.getPhones(page, limit, category, sortBy, order, search);
+      const { page, limit, category, sortBy, order, search } = req.query;
+      const getPhonesService = await phoneService.getPhones(
+        Number(page),
+        Number(limit),
+        category,
+        sortBy,
+        order,
+        search
+      );
       res.status(200).json(getPhonesService);
     } catch (e) {
       next(e);
