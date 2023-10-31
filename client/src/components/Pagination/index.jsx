@@ -12,7 +12,6 @@ export const Pagination = ({ limit, countPages, currentPage, onChangePage }) => 
     pageRangeDisplayed={limit}
     pageCount={countPages}
     forcePage={currentPage - 1}
-    renderOnZeroPageCount={null}
   />
 );
 

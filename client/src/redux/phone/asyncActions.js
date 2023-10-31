@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const API_URL = process.env.REACT_APP_STAGE === "development" && process.env.REACT_APP_API_URL;
+const API_URL = process.env.REACT_APP_STAGE === "development" ? process.env.REACT_APP_API_URL : process.env.REACT_APP_VERSEL_URL;
 
 export const fetchPhones = createAsyncThunk(
   "phone/fetchPhonesStatus",
