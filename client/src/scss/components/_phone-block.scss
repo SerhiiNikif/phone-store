@@ -1,9 +1,8 @@
 @import '../variables';
 
 .phone-block {
-  width: 280px;
+  width: 240px;
   text-align: center;
-  margin-bottom: 65px;
 
   &-wrapper {
     display: flex;
@@ -11,15 +10,15 @@
   }
 
   &__image {
-    width: 260px;
-    height: 318px;
+    width: 220px;
+    height: 230px;
   }
 
   &__title {
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 900;
     letter-spacing: 1%;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
   }
 
   &__selector {
@@ -38,11 +37,11 @@
       }
 
       li {
-        padding: 8px;
+        padding: 5px;
         flex: 1;
         cursor: pointer;
         font-weight: 600;
-        font-size: 14px;
+        font-size: 13px;
         @include noselect();
         &.active {
           background: #ffffff;
@@ -58,13 +57,13 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-top: 20px;
+    margin-top: 12px;
   }
 
   &__price {
     font-weight: bold;
-    font-size: 22px;
-    line-height: 27px;
+    font-size: 17px;
+    line-height: 25px;
     letter-spacing: 0.015em;
   }
 }

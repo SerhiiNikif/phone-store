@@ -11,11 +11,14 @@
     .left {
       width: 480px;
       margin-right: 20px;
-      margin-bottom: 20px;
-      height: 170px;
+
+      h2 {
+        font-size: 24px;
+      }
 
       .description {
-        margin-top: 20px;
+        margin-top: 10px;
+        font-size: 13px;
         margin-bottom: 20px;
       }
 
@@ -26,7 +29,7 @@
           margin-right: 10px;
 
           img {
-            width: 30px;
+            width: 25px;
           }
         }
       }
@@ -35,16 +38,19 @@
     .center {
       width: 250px;
       margin-right: 20px;
-      margin-bottom: 20px;
-      height: 170px;
+
+      h2 {
+        font-size: 24px;
+      }
 
       .list {
-        margin-top: 20px;
+        margin-top: 10px;
 
         .block {
           display: flex;
           justify-content: space-between;
-          margin-bottom: 10px;
+          margin-bottom: 6px;
+          font-size: 14px;
 
           &:last-of-type {
             margin-bottom: 0px;
@@ -59,18 +65,22 @@
 
     .right {
       width: 360px;
-      margin-bottom: 20px;
-      height: 170px;
+
+      h2 {
+        font-size: 24px;
+      }
 
       .contact {
-        margin-top: 20px;
+        margin-top: 10px;
 
         .contact-item {
-          margin-bottom: 5px;
+          margin-bottom: 6px;
+          line-height: 14px;
+          font-size: 14px;
 
           img {
-            width: 20px;
-            margin-right: 10px;
+            width: 15px;
+            margin-right: 7px;
           }
         }
       }
@@ -83,7 +93,7 @@
           margin-right: 10px;
 
           img {
-            width: 35px;
+            width: 30px;
           }
         }
       }

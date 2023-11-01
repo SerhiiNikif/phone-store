@@ -82,7 +82,7 @@ const Home = () => {
   }, [categoryId, sort.sortProperty, searchValue, currentPage]);
 
   const phones = items.map((obj) => <PhoneBlock key={obj._id} {...obj} />);
-  const skeletons = [...new Array(4)].map((_, index) => (
+  const skeletons = [...new Array(5)].map((_, index) => (
     <Skeleton key={index} />
   ));
 

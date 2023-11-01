@@ -15,7 +15,7 @@ class PhoneService {
         .sort({ [sortBy]: order }),
       PhoneModel.countDocuments()
     ]);
-    const countPages = Math.round(countPhones / limit);
+    const countPages = Math.ceil(countPhones / limit);
 
     return { phones, countPages, limit };
   }

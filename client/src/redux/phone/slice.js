@@ -3,7 +3,7 @@ import { fetchPhones } from "./asyncActions";
 
 const initialState = {
   items: [],
-  limit: 4,
+  limit: 5,
   countPages: 1,
   status: "loading", // loading | succes | error
 };

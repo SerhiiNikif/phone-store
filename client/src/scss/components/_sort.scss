@@ -2,16 +2,18 @@
 
 .sort {
   position: relative;
+
   &__label {
     display: flex;
     align-items: center;
+    font-size: 13px;
 
     svg {
-      margin-right: 8px;
+      margin-right: 7px;
     }
 
     b {
-      margin-right: 8px;
+      margin-right: 7px;
     }
 
     span {
@@ -24,17 +26,18 @@
   &__popup {
     position: absolute;
     right: 0;
-    margin-top: 15px;
+    margin-top: 13px;
     background: #ffffff;
     box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.09);
     border-radius: 10px;
     overflow: hidden;
-    padding: 10px 0;
+    padding: 8px 0;
+    font-size: 13px;
 
     ul {
       overflow: hidden;
       li {
-        padding: 12px 20px;
+        padding: 8px 18px;
         cursor: pointer;
 
         &.active,
