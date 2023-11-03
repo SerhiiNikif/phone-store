@@ -15,11 +15,11 @@ import {
 
 export const Footer = () => {
   return (
-    <div>
-      <div className="footer">
-        <div className="container">
-          <div className="left">
-            <h2>Community</h2>
+    <div className="footer">
+      <div className="container">
+        <div className="left">
+          <h2>Community</h2>
+          <div className="description__social">
             <div className="description">
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti fugiat asperiores delectus, 
               ullam beatae quos inventore maxime quia eius distinctio minima quae nostrum, suscipit fuga quo!
@@ -40,38 +40,40 @@ export const Footer = () => {
               </div>
             </div>
           </div>
+        </div>
 
-          <div className="center">
-            <h2>Useful Links</h2>
-            <div className="list">
-              <div className="block">
-                <div className="list-item">Home</div>
-                <div className="list-item">Cart</div>
-              </div>
-
-              <div className="block">
-                <div className="list-item">Accessories</div>
-                <div className="list-item">My Account</div>
-              </div>
-
-              <div className="block">
-                <div className="list-item">Order Tracking</div>
-                <div className="list-item">Wishlist</div>
-              </div>
-
-              <div className="block">
-                <div className="list-item">Fashion</div>
-                <div className="list-item">Terms</div>
-              </div>
+        <div className="center">
+          <h2>Useful Links</h2>
+          <div className="list">
+            <div className="block">
+              <div className="list-item">Home</div>
+              <div className="list-item">Cart</div>
             </div>
-          </div>
 
-          <div className="right">
-            <h2>Contact</h2>
+            <div className="block">
+              <div className="list-item">Accessories</div>
+              <div className="list-item">My Account</div>
+            </div>
+
+            <div className="block">
+              <div className="list-item">Order Tracking</div>
+              <div className="list-item">Wishlist</div>
+            </div>
+
+            {/* <div className="block">
+              <div className="list-item">Fashion</div>
+              <div className="list-item">Terms</div>
+            </div> */}
+          </div>
+        </div>
+
+        <div className="right">
+          <h2>Contact</h2>
+          <div className="contact__payment">
             <div className="contact">
               <div className="contact-item">
                 <img src={address} alt="Address" />
-                <span>622 Dixie Path , South Tobinchester 98336</span>
+                <span>622 Dixie Path, <span className="address_sity">South Tobinchester 98336</span></span>
               </div>
               <div className="contact-item">
                 <img src={phone} alt="Phone" />

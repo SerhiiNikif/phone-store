@@ -86,6 +86,17 @@ const Home = () => {
     <Skeleton key={index} />
   ));
 
+  const noPhoneFound = (
+    <div className="content__no-phone-found">
+      <h1>
+        <span>😕</span>
+        <br />
+        No phone found
+      </h1>
+      <p>Try changing the category or page number.</p>
+    </div>
+  );
+
   return (
     <div className="container">
       <div className="content__top">
@@ -95,13 +106,23 @@ const Home = () => {
       <h2 className="content__title">All phones</h2>
       {status === "error" ? (
         <div className="content__error-info">
-          <h2>An error has occurred 😕</h2>
+          <h1>An error has occurred 😕</h1>
           <p>Unfortunately, we were unable to obtain phones. Please try again later.</p>
         </div>
       ) : (
-        <div className="content__items">
-          {status === "loading" ? skeletons : phones}
-        </div>
+        status === "loading" ? (
+          <div className="content__items">
+            {skeletons}
+          </div>
+        ) : (
+          phones.length === 0 ? (
+            noPhoneFound
+          ) : (
+            <div className="content__items">
+              {phones}
+            </div>
+          )
+        )
       )}
       <Pagination limit={limit} countPages={countPages} currentPage={currentPage} onChangePage={onChangePage} />
     </div>

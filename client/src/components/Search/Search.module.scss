@@ -42,3 +42,24 @@
     opacity: 0.8;
   }
 }
+
+@media (max-width: 850px) {
+  .input {
+    font-size: 12px;
+    padding: 10px 17px;
+    padding-left: 38px;
+    width: 270px;
+  }
+
+  .icon {
+    width: 18px;
+    height: 18px;
+    top: 10px;
+  }
+
+  .clearIcon {
+    width: 15px;
+    height: 15px;
+    top: 11px;
+  }
+}

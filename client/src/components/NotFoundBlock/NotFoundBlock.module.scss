@@ -1,11 +1,21 @@
 .root {
-  padding: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 51vh;
   max-width: 750px;
   margin: 0 auto;
+}
+
+.content {
   text-align: center;
 
   span {
-    font-size: 64;
+    font-size: 60px;
+  }
+
+  h1 {
+    font-size: 42px
   }
 }
 

@@ -1,9 +1,9 @@
 import React from "react";
 import styles from "./NotFoundBlock.module.scss";
 
-export const NotFoundBlock = () => {
-  return (
-    <div className={styles.root}>
+export const NotFoundBlock = () => (
+  <div className={styles.root}>
+    <div className={styles.content}>
       <h1>
         <span>😕</span>
         <br />
@@ -11,5 +11,6 @@ export const NotFoundBlock = () => {
       </h1>
       <p className={styles.description}>Unfortunately, this page is not available in our online store.</p>
     </div>
-  );
-}
+  </div>
+);
+

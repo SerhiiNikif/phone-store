@@ -29,9 +29,11 @@ const FullPhone = () => {
 
   return (
     <div className="container">
-      <img src={phone.imageUrl} alt="" />
-      <h2>{phone.title}</h2>
-      <h4>{phone.price} ₴</h4>
+      <div className="full-phone">
+        <img src={phone.imageUrl} alt="" />
+        <h2>{phone.title}</h2>
+        <h3>{phone.price} ₴</h3>
+      </div>
     </div>
   );
 };
