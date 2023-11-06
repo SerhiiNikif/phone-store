@@ -4,6 +4,9 @@ import { Route, Routes } from "react-router-dom";
 import "./scss/app.scss";
 import MainLayout from "./layouts/MainLayout";
 import Home from "./pages/Home";
+import Register from "./pages/Register";
+import Login from "./pages/Login";
+
 const Cart = lazy(() => import(/* webpackChunkName: "Cart" */ './pages/Cart'));
 const FullPhone = lazy(() => import(/* webpackChunkName: "FullPhone" */ './pages/FullPhone'));
 const NotFound = lazy(() => import(/* webpackChunkName: "NotFound" */ './pages/NotFound'));
@@ -18,6 +21,9 @@ function App() {
           <Route path="phone/:id" element={<FullPhone />} />
           <Route path="*" element={<NotFound />} />
         </Route>
+
+        <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
     </Suspense>
   );

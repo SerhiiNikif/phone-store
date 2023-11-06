@@ -15,7 +15,7 @@ export const CartItem = ({ _id, title, type, size, price, count, imageUrl }) => 
   };
 
   const onClickRemove = () => {
-    if (window.confirm("Are you sure you want to delete the product?")) {
+    if (window.confirm("Are you sure you want to delete the item?")) {
       dispatch(removeItem(_id));
     }
   };

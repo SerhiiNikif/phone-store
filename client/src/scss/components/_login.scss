@@ -1,0 +1,75 @@
+.login {
+  &__container {
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(
+      rgba(255, 255, 255, 0.5),
+      rgba(255, 255, 255, 0.5)
+      ),
+      url("https://images.pexels.com/photos/6984650/pexels-photo-6984650.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940")
+      center;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__wrapper {
+    width: 20%;
+    padding: 20px;
+    background-color: white;
+    border-radius: 20px;
+
+    a {
+      margin: 5px 0px;
+      font-size: 14px;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    .link-login, .link-forgot {
+      text-align: center;
+    }
+  }
+
+  &__title {
+    font-size: 24px;
+    font-weight: 300;
+    margin-bottom: 20px;
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+
+    input {
+      flex: 1;
+      min-width: 40%;
+      margin: 0px 10px 10px 0px;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      padding: 12px 20px;
+      border-radius: 10px;
+
+      &:focus {
+        border: 1px solid rgba(0, 0, 0, 0.2);
+      }
+    }
+
+    button {
+      width: 100%;
+      border: none;
+      padding: 13px 20px;
+      background-color: #0c4a6e;
+      color: white;
+      cursor: pointer;
+      border-radius: 20px;
+      margin-top: 10px;
+
+      &:hover {
+        background-color: #082f49;
+        border-color: #082f49;
+      }
+    }
+  }
+}

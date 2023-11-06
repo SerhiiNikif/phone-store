@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import qs from "qs";
 import { useNavigate } from "react-router-dom";
 
-import { PhoneBlock, Categories, Sort, Skeleton, Pagination } from "../components";
+import { PhoneBlock, Categories, Sort, Skeleton, Pagination, ServerError, NoPhoneFound } from "../components";
 import { sortList } from "../components/Sort";
 import { setCategoryId, setCurrentPage, setFilters } from "../redux/filter/slice";
 import { fetchPhones } from "../redux/phone/asyncActions";
@@ -86,17 +86,6 @@ const Home = () => {
     <Skeleton key={index} />
   ));
 
-  const noPhoneFound = (
-    <div className="content__no-phone-found">
-      <h1>
-        <span>😕</span>
-        <br />
-        No phone found
-      </h1>
-      <p>Try changing the category or page number.</p>
-    </div>
-  );
-
   return (
     <div className="container">
       <div className="content__top">
@@ -105,25 +94,13 @@ const Home = () => {
       </div>
       <h2 className="content__title">All phones</h2>
       {status === "error" ? (
-        <div className="content__error-info">
-          <h1>An error has occurred 😕</h1>
-          <p>Unfortunately, we were unable to obtain phones. Please try again later.</p>
-        </div>
+        <ServerError />
       ) : (
-        status === "loading" ? (
-          <div className="content__items">
-            {skeletons}
-          </div>
-        ) : (
-          phones.length === 0 ? (
-            noPhoneFound
-          ) : (
-            <div className="content__items">
-              {phones}
-            </div>
-          )
-        )
+        <div className="content__items">
+          {status === "loading" ? skeletons : phones}
+        </div>
       )}
+      {phones.length === 0 && status === "success" && <NoPhoneFound />}
       <Pagination limit={limit} countPages={countPages} currentPage={currentPage} onChangePage={onChangePage} />
     </div>
   );

@@ -12,7 +12,7 @@ const FullPhone = () => {
   useEffect(() => {
     async function fetchPhone() {
       try {
-        const { data } = await axios.get(`${API_URL}/${id}`);
+        const {data} = await axios.get(`${API_URL}/phones/${id}`);
         setPhone(data);
       } catch (error) {
         alert("Error when receiving phone!");

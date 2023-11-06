@@ -9,3 +9,5 @@ export * from "./Search";
 export * from "./CartItem";
 export * from "./CartEmpty";
 export * from "./Footer";
+export * from "./ErrorBlock/ServerError";
+export * from "./ErrorBlock/NoPhoneFound";

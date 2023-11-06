@@ -8,7 +8,7 @@ export const fetchPhones = createAsyncThunk(
   async (params) => {
     const { category, sortBy, order, search, currentPage, limit } = params;
     const { data } = await axios.get(
-      `${API_URL}?page=${currentPage}&limit=${limit}&${category}&sortBy=${sortBy}&order=${order}${search}`
+      `${API_URL}/phones?page=${currentPage}&limit=${limit}&${category}&sortBy=${sortBy}&order=${order}${search}`
     );
 
     return data;

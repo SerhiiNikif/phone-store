@@ -1,10 +1,13 @@
-import { Outlet } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
+import { useSelector } from "react-redux";
 
-import { Header } from "../components";
-import { Footer } from "../components";
+import { Header, Footer } from "../components";
+import { selectUser } from "../redux/user/selectors";
 
 const MainLayout = () => {
-  return (
+  const { isAuth } = useSelector(selectUser);
+  
+  return isAuth ? (
     <div className="wrapper">
       <Header />
       <div className="content">
@@ -12,7 +15,9 @@ const MainLayout = () => {
       </div>
       <Footer />
     </div>
-  );
+  ) : (
+    <Navigate replace to="/login" />
+  )
 };
 
 export default MainLayout;

@@ -12,6 +12,14 @@
     .logo__search {
       display: flex;
     }
+
+    .logout__cart {
+      display: flex;
+
+      .logout {
+        margin-left: 5px;
+      }
+    }
   }
 
   &__logo {
